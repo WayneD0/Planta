@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 30, 2014 5:43:43 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.selmec.plantaselmec.Models.Usuarios" table="usuarios" catalog="casetapruebas" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="nombres" type="string">
+            <column name="nombres" length="50" not-null="true" />
+        </property>
+        <property name="apellidos" type="string">
+            <column name="apellidos" length="50" not-null="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="50" not-null="true" />
+        </property>
+        <property name="rol" type="string">
+            <column name="rol" length="50" not-null="true" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="50" not-null="true" />
+        </property>
+        <set name="ensamblebases" table="ensamblebase" inverse="true" lazy="true" fetch="join">
+            <key>
+                <column name="UsuarioID" not-null="true" />
+            </key>
+            <one-to-many class="com.selmec.plantaselmec.Models.Ensamblebase" />
+        </set>
+        <set name="roles" cascade="save-update" table="usuario_rol" fetch="join">
+            <key column="UsuarioID"/>
+            <many-to-many column="RolID" class="com.selmec.plantaselmec.Models.Rol"/>
+        </set>
+    </class>
+</hibernate-mapping>
